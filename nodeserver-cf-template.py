@@ -16,24 +16,28 @@ from troposphere.iam import (
     PolicyType as IAMPolicy,
     Role,
 )
-from awacs.aws import (\
+from awacs.aws import (
     Action,
     Allow,
     Policy,
     Principal,
     Statement,
 )
+
 from awacs.sts import AssumeRole
 
 ApplicationName = "nodeserver"
 ApplicationPort = "3000"
+
 GithubAccount = "farpluto"
 GithubAnsibleURL = "https://github.com/{}/ansible".format(GithubAccount)
+
 AnsiblePullCmd = \
     "/usr/local/bin/ansible-pull -U {} {}.yml -i localhost".format(
-     GithubAnsibleURL, 
-     ApplicationName
-)
+        GithubAnsibleURL, 
+        ApplicationName
+    )
+
 PublicCidrIp = str(ip_network(get_ip()))
 t = Template()
 t.add_description("Effective DevOps in AWS: HelloWorld web application")
